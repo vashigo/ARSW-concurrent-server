@@ -21,9 +21,9 @@ public class ErrorWriter implements ResourceWriter {
     @Override
     public void write(String file, Socket clientSocket) {
         try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
-            String outputLine = "HTTP/1.1 " + message + "\r\n"
+            String outputLine = "HTTP/1.1 " + message + " \r\n"
                     + "Content-Type: text/html\n"
-                    + "\r\n"
+                    + "\r\n\r\n"
                     + "<!DOCTYPE html>"
                     + "<html>"
                     + "<head>"
