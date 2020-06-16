@@ -3,6 +3,13 @@
 Escriba un servidor web que soporte múltiples solicitudes seguidas (concurrentes). El servidor debe retornar todos los archivos solicitados, incluyendo
 páginas html e imágenes. 
 
+# Link funcional  app montada en heroku
+
+* [Prueba con una plantilla Bootstrap](https://concurrent-server-arsw.herokuapp.com/index.html)
+* [Prueba con una imagen](https://concurrent-server-arsw.herokuapp.com/prueba.jpg)
+
+
+
 ## Prerequisitos
 
 Tener instalado Java jdk versiones 7+, Maven comandos, git y JMeter 3.1.0
