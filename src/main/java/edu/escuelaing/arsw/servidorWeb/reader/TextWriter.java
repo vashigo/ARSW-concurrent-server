@@ -36,8 +36,6 @@ public class TextWriter implements ResourceWriter {
             out.close();
         } catch (IOException ex) {
             new ErrorWriter("404 Not Found").write("", clientSocket);
-        } finally {
-            out.close();
         }
         
     }     
