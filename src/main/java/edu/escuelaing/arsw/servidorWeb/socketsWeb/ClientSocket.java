@@ -20,7 +20,7 @@ public class ClientSocket implements Runnable {
     }
 
     @Override
-    public void run() {
+    public synchronized  void run() {
         ResourceWriter rw = null;
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -28,7 +28,9 @@ public class ClientSocket implements Runnable {
             rw = ResourceChooser.choose(path);
             rw.write(path, clientSocket);
             in.close();
+            wait();
             clientSocket.close();
+            
         } catch (Exception ex) {
             System.err.println(ex.getMessage() + ": Error del proceso en el servidor");
         }
