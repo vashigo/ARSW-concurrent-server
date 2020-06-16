@@ -15,7 +15,7 @@ public class WebServerHttpApp {
 
     public static void main(String[] args) throws IOException {
         //socket con 1000 threads (users)
-        WebServerHttp webServer = new WebServerHttp(10);
+        WebServerHttp webServer = new WebServerHttp(1000);
         webServer.start();
     }
 }
