@@ -3,11 +3,10 @@ package edu.escuelaing.arsw.servidorWeb.reader;
 import java.io.*;
 import java.net.Socket;
 
-
 /**
- * select what type of parameter it is if it is png, html, jpg, css, 
- * javascript or ico
- * 
+ * select what type of parameter it is if it is png, html, jpg, css, javascript
+ * or ico
+ *
  * @author vashi
  */
 public class InterpreterResource {
@@ -16,19 +15,26 @@ public class InterpreterResource {
 
     InterpreterResource(String resource, Socket clientSocket) {
         this.clientSocket = clientSocket;
-        if (resource.toLowerCase().contains(".html")){textResource(resource,"html");}
-        else if (resource.toLowerCase().contains(".css")){textResource(resource,"css");}
-        else if (resource.toLowerCase().contains(".js")){textResource(resource,"js");}
-        else if (resource.toLowerCase().contains(".png")){imageResource(resource,"png");}
-        else if (resource.toLowerCase().contains(".jpg")){imageResource(resource,"jpg");}
-        else if (resource.toLowerCase().contains(".ico")){imageResource(resource,"ico");}
-        else{
+        if (resource.toLowerCase().contains(".html")) {
+            textResource(resource, "html");
+        } else if (resource.toLowerCase().contains(".css")) {
+            textResource(resource, "css");
+        } else if (resource.toLowerCase().contains(".js")) {
+            textResource(resource, "js");
+        } else if (resource.toLowerCase().contains(".png")) {
+            imageResource(resource, "png");
+        } else if (resource.toLowerCase().contains(".jpg")) {
+            imageResource(resource, "jpg");
+        } else if (resource.toLowerCase().contains(".ico")) {
+            imageResource(resource, "ico");
+        } else {
             errorType();
         }
     }
+
     /**
-     * error para mostrar en pantalla de que no se puede procesar otro formato que nosea
-     * .html o .png
+     * error para mostrar en pantalla de que no se puede procesar otro formato
+     * que nosea .html o .png
      */
     private void errorType() {
         try {
@@ -54,8 +60,10 @@ public class InterpreterResource {
             e.printStackTrace();
         }
     }
+
     /**
-     * Se encarga de mostrar en pantalla al no encontrar la direccion o archivo especificado
+     * Se encarga de mostrar en pantalla al no encontrar la direccion o archivo
+     * especificado
      */
     private void raise404() {
         try {
@@ -81,10 +89,11 @@ public class InterpreterResource {
             e.printStackTrace();
         }
     }
-    
+
     /**
-     * Se encarga de manejar las imagenes de cualquier formato almacenado en resources
-     * 
+     * Se encarga de manejar las imagenes de cualquier formato almacenado en
+     * resources
+     *
      * @param resource
      */
     private void imageResource(String resource, String type) {
@@ -106,22 +115,24 @@ public class InterpreterResource {
         }
 
     }
+
     /**
      * Se encarga de manejar el html almacenado en resources
+     *
      * @param resource
      */
     private void textResource(String resource, String type) {
-        PrintWriter out=null;
+        PrintWriter out = null;
         try {
-            String outputLine="";
-            out = new PrintWriter(clientSocket.getOutputStream(), true);           
+            String outputLine = "";
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader bf = new BufferedReader(new FileReader("resources" + resource));
             outputLine = "HTTP/1.1 200 OK \r\n";
-            outputLine+="Content-Type: text/"+type+"\r\n";
-            outputLine+="\r\n\r\n";
+            outputLine += "Content-Type: text/" + type + "\r\n";
+            outputLine += "\r\n\r\n";
             String bfRead;
             while ((bfRead = bf.readLine()) != null) {
-                outputLine+=bfRead;
+                outputLine += bfRead;
             }
             out.println(outputLine);
             out.close();
