@@ -14,14 +14,13 @@ import java.util.concurrent.Executors;
  */
 public class WebServerHttp {
 
-    private boolean run;
-    private static final Object lock = new Object();
-    private ExecutorService executor;
+    private final boolean run;
+    private ExecutorService poolThreads;
     public ServerSocket serverSocket;
 
     public WebServerHttp(int nThread) {
         run = true;
-        executor = Executors.newFixedThreadPool(nThread);
+        poolThreads = Executors.newFixedThreadPool(nThread);
     }
 
     /**
@@ -40,7 +39,7 @@ public class WebServerHttp {
                 socket = serverSocket.accept();
                 System.out.println("\nNueva conexión entrante: " + socket +"\n");
                 Runnable process = new ClientSocketThread(socket);
-                executor.execute(process);
+                poolThreads.execute(process);
 
             } catch (IOException e) {
                 System.out.println("\nError al intentar escuchar por el puerto " + serverSocket.getLocalPort() + " o la conexión con el cliente\n");
@@ -49,22 +48,4 @@ public class WebServerHttp {
 
         }
     }
-
-    /**
-     * stop concurrent Web Server
-     *
-     */
-    public void stop() {
-        this.run = false;
-        this.executor.shutdown();
-        while (!executor.isTerminated()) {
-            // esperar  a que terminen todos los procesos    	
-        }
-        try {
-            serverSocket.close();
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage() + ": No se puede iniciar socket seleccionado o No existe socket");
-        }
-    }
-
 }
