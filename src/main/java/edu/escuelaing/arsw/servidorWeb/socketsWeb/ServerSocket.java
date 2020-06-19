@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  * Socket of Server
- * 
+ *
  * @author Vashi
  */
 public class ServerSocket {
@@ -14,8 +14,8 @@ public class ServerSocket {
 
     /**
      * Create a new server Socket
-     * 
-     * @return 
+     *
+     * @return
      */
     public static java.net.ServerSocket getNewServerSocket() {
         java.net.ServerSocket serverSocket = null;
@@ -30,8 +30,8 @@ public class ServerSocket {
 
     /**
      * get port the socket server
-     * 
-     * @return 
+     *
+     * @return
      */
     private static int getPort() {
         if (System.getenv("PORT") != null) {

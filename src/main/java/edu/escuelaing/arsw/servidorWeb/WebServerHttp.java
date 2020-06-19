@@ -37,7 +37,7 @@ public class WebServerHttp {
 
                 Socket socket;
                 socket = serverSocket.accept();
-                System.out.println("\nNueva conexión entrante: " + socket +"\n");
+                System.out.println("\nNueva conexión entrante: " + socket + "\n");
                 Runnable process = new ClientSocketThread(socket);
                 poolThreads.execute(process);
 

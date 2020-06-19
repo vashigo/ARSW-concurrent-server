@@ -1,15 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.escuelaing.arsw.servidorWeb.reader;
 
 import java.net.Socket;
 
-
+/**
+ * class extends InterpreterResource
+ * 
+ * @author Vashi
+ */
 public class InterpreterResourceImpl extends InterpreterResource {
-
+    
+    /**
+     * constructor implementation
+     * 
+     * @param resource - String resource format
+     * @param clientSocket - socket of client
+     */
     public InterpreterResourceImpl(String resource, Socket clientSocket) {
         super(resource, clientSocket);
     }

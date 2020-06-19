@@ -32,13 +32,12 @@ public class ClientSocketThread implements Runnable {
                 if (!in.ready()) {
                     break;
                 }
-            }           
+            }
 
-            rw = new InterpreterResourceImpl(path ,clientSocket);
-            
+            rw = new InterpreterResourceImpl(path, clientSocket);
+
             in.close();
 
-            
         } catch (Exception ex) {
             System.err.println(ex.getMessage() + ": error processing server information");
         }
